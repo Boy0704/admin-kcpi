@@ -1,0 +1,8 @@
+version: '3.5'
+
+services:
+  admin-panel:
+    container_name: web-admin-panel
+    image: web-admin-panel:0.0.1
+    ports:
+      - 3000:3000

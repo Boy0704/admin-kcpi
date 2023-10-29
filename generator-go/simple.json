@@ -1,0 +1,31 @@
+{
+  "folder_name" : "contentnew",
+  "endpoint" : "/content-static",
+  "entity" : [
+    {
+      "label": "Image",
+      "data_type" : "image",
+      "field_name" : "image"
+    },
+    {
+      "label": "Judul",
+      "data_type" : "",
+      "field_name" : "title"
+    },
+    {
+      "label": "Content",
+      "data_type" : "",
+      "field_name" : "content"
+    },
+    {
+      "label": "Category",
+      "data_type" : "",
+      "field_name" : "id_category"
+    },
+    {
+      "label": "Publish",
+      "data_type" : "false",
+      "field_name" : "publish"
+    }
+  ]
+}
