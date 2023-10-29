@@ -1,26 +1,16 @@
 {
-  "folder_name" : "contentnew",
-  "endpoint" : "/content-static",
+  "folder_name" : "gallery",
+  "endpoint" : "/gallery",
   "entity" : [
     {
-      "label": "Image",
+      "label": "Media",
       "data_type" : "image",
-      "field_name" : "image"
+      "field_name" : "media"
     },
     {
-      "label": "Judul",
+      "label": "Type",
       "data_type" : "",
-      "field_name" : "title"
-    },
-    {
-      "label": "Content",
-      "data_type" : "",
-      "field_name" : "content"
-    },
-    {
-      "label": "Category",
-      "data_type" : "",
-      "field_name" : "id_category"
+      "field_name" : "type"
     },
     {
       "label": "Publish",

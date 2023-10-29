@@ -5,12 +5,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>Data Contentnew</h1>
+						<h1>Data Gallery</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="">Home</a></li>
-							<li class="breadcrumb-item active">Data Contentnew</li>
+							<li class="breadcrumb-item active">Data Gallery</li>
 						</ol>
 					</div>
 				</div>
@@ -31,23 +31,22 @@
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalForm"
 									@click="tambah"><i class="fa fa-plus"></i> Tambah</button>
 								<br /><br />
-								<vue-good-table :columns="columns" :rows="contentnews" :pagination-options="{
+								<vue-good-table :columns="columns" :rows="gallerys" :pagination-options="{
 									enabled: true,
 								}" :search-options="{
 	enabled: true
 }">
 									<template slot="table-row" slot-scope="props">
-										<span v-if="props.column.field == 'image'">
-											<img :src="urlFile + '/img/' + props.row.image" width="200px" height="150px">
+										<span v-if="props.column.field == 'media'">
+											<video width="200" controls v-if="props.row.type == 'video'">
+												<source :src="urlFile + '/video/' + props.row.media" type="video/mp4">
+												Your browser does not support HTML video.
+											</video>
+											<img :src="urlFile + '/img/' + props.row.media" width="200px" height="150px"
+												v-else>
 										</span>
-										<span v-if="props.column.field == 'title'">
-											{{ props.row.title }}
-										</span>
-										<span v-if="props.column.field == 'content'">
-											<span v-html="props.row.content"></span>
-										</span>
-										<span v-if="props.column.field == 'id_category'">
-											{{ props.row.id_category }}
+										<span v-if="props.column.field == 'type'">
+											{{ props.row.type }}
 										</span>
 										<span v-if="props.column.field == 'publish'">
 											<span v-if="props.row.publish == 'y'" class="badge badge-success">yes</span>
@@ -83,34 +82,29 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label for="exampleInputFile">Image</label>
+								<label for="exampleInputFile">Media</label>
 								<div class="input-group">
 									<div class="custom-file">
-										<input type="file" ref="file" class="form-control" @change="onFileUpload">
+										<input type="file" ref="file" class="form-control" @change="onFileUpload"
+											accept="image/*, video/*">
 									</div>
 								</div>
 								<div v-if="titleModal == 'Edit Data'">
-									<p>*) Image sebelumnya</p>
-									<img :src="urlFile + '/img/' + formData.imageUrl" width="100px" height="100px">
+									<p>*) File sebelumnya</p>
+									<video width="200" controls v-if="formData.type == 'video'">
+										<source :src="urlFile + '/video/' + formData.mediaUrl" type="video/mp4">
+										Your browser does not support HTML video.
+									</video>
+									<img :src="urlFile + '/img/' + formData.mediaUrl" width="200px" height="150px" v-else>
 								</div>
 							</div>
 							<div class="form-group">
-								<label>Judul</label>
-								<input type="text" class="form-control" placeholder="Masukkan Judul"
-									v-model="formData.title">
-							</div>
-							<div class="form-group">
-								<label>Content</label>
-								<client-only>
-									<quill-editor ref="editor" v-model="formData.content" :options="editorOption"
-										@blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
-										@ready="onEditorReady($event)" />
-								</client-only>
-							</div>
-							<div class="form-group">
-								<label>Category</label>
-								<input type="text" class="form-control" placeholder="Masukkan Category"
-									v-model="formData.id_category">
+								<label>Type</label>
+								<select class="form-control" v-model="formData.type">
+									<option value="">Type</option>
+									<option value="image">Image</option>
+									<option value="video">Video</option>
+								</select>
 							</div>
 							<div class="form-check">
 								<input type="checkbox" :checked="formData.publish" class="form-check-input"
@@ -145,30 +139,20 @@ export default {
 			existFile: false,
 			titleModal: 'Tambah',
 			formData: {
-				image: null,
-				imageUrl: '',
-				title: '',
-				content: '',
-				id_category: '',
+				media: null,
+				mediaUrl: '',
+				type: '',
 				publish: false,
 			},
-			contentnews: [],
+			gallerys: [],
 			columns: [
 				{
-					label: 'Image',
-					field: 'image',
+					label: 'Media',
+					field: 'media',
 				},
 				{
-					label: 'Judul',
-					field: 'title',
-				},
-				{
-					label: 'Content',
-					field: 'content',
-				},
-				{
-					label: 'Category',
-					field: 'id_category',
+					label: 'Type',
+					field: 'type',
 				},
 				{
 					label: 'Publish',
@@ -180,57 +164,24 @@ export default {
 					width: '200px',
 				},
 			],
-			editorOption: {
-				// Some Quill options...
-				theme: 'snow',
-				modules: {
-					toolbar: [
-						['bold', 'italic', 'underline', 'strike'],
-						['blockquote', 'code-block'],
-						[{ 'header': 1 }, { 'header': 2 }],
-						[{ 'list': 'ordered' }, { 'list': 'bullet' }],
-						[{ 'script': 'sub' }, { 'script': 'super' }],
-						[{ 'indent': '-1' }, { 'indent': '+1' }],
-						[{ 'direction': 'rtl' }],
-						[{ 'size': ['small', false, 'large', 'huge'] }],
-						[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-						[{ 'font': [] }],
-						[{ 'color': [] }, { 'background': [] }],
-						[{ 'align': [] }],
-						['clean'],
-						['link', 'image', 'video']
-					]
-				}
-			}
 		}
 	},
 	methods: {
-		onEditorBlur(editor) {
-			console.log('editor blur!', editor)
-		},
-		onEditorFocus(editor) {
-			console.log('editor focus!', editor)
-		},
-		onEditorReady(editor) {
-			console.log('editor ready!', editor)
-		},
 		onFileUpload(event) {
 			this.existFile = true
-			this.formData.image = event.target.files[0]
-			console.log(this.formData.image)
+			this.formData.media = event.target.files[0]
+			console.log(this.formData.media)
 		},
 		async onSubmit() {
 			let formReq = new FormData()
 			if (this.existFile) {
-				formReq.append('file_img', this.formData.image)
+				formReq.append('file_img', this.formData.media)
 			}
-			formReq.append('title', this.formData.title)
-			formReq.append('content', this.formData.content)
-			formReq.append('id_category', this.formData.id_category)
+			formReq.append('type', this.formData.type)
 			formReq.append('publish', this.formData.publish ? 'y' : 't')
 			if (this.isEdit == false) {
 				await this.$axios
-					.$post('/content-static', formReq, {
+					.$post('/gallery', formReq, {
 						headers: {
 							'Content-Type': 'multipart/form-data'
 						}
@@ -247,7 +198,7 @@ export default {
 					})
 			} else {
 				await this.$axios
-					.$put('/content-static/' + this.idEdit, formReq, {
+					.$put('/gallery/' + this.idEdit, formReq, {
 						headers: {
 							'Content-Type': 'multipart/form-data'
 						}
@@ -277,18 +228,14 @@ export default {
 			this.isEdit = true
 			this.titleModal = "Edit Data"
 			this.idEdit = data.id
-			this.formData.imageUrl = data.image
-			this.formData.title = data.title
-			this.formData.content = data.content
-			this.formData.id_category = data.id_category
+			this.formData.mediaUrl = data.media
+			this.formData.type = data.type
 			this.formData.publish = data.publish == 'y' ? true : false
 		},
 		reset() {
-			this.formData.image = null
-			this.formData.imageUrl = ''
-			this.formData.title = ''
-			this.formData.content = ''
-			this.formData.id_category = ''
+			this.formData.media = null
+			this.formData.mediaUrl = ''
+			this.formData.type = ''
 			this.formData.publish = false
 			this.$refs.file.value = null;
 			this.isEdit = false
@@ -297,10 +244,10 @@ export default {
 		},
 		async getData() {
 			await this.$axios
-				.$get('/content-static')
+				.$get('/gallery')
 				.then((res) => {
 					console.log(res)
-					this.contentnews = res.data
+					this.gallerys = res.data
 				})
 				.catch((err) => {
 					console.log(err)
@@ -309,7 +256,7 @@ export default {
 		async deleteData(id) {
 			if (confirm('Are you sure to delete this data ?')) {
 				await this.$axios
-					.$delete('/content-static/' + id)
+					.$delete('/gallery/' + id)
 					.then((res) => {
 						console.log(res)
 						this.getData()
