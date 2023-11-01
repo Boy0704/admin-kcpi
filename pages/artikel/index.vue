@@ -43,11 +43,8 @@
 										<span v-if="props.column.field == 'title'">
 											{{ props.row.title }}
 										</span>
-										<span v-if="props.column.field == 'content'">
-											{{ props.row.content }}
-										</span>
 										<span v-if="props.column.field == 'id_category'">
-											{{ props.row.id_category }}
+											{{ props.row.category }}
 										</span>
 										<span v-if="props.column.field == 'publish'">
 											<span v-if="props.row.publish == 'y'" class="badge badge-success">yes</span>
@@ -108,7 +105,7 @@
 								</client-only>
 							</div>
 							<div class="form-group">
-								<label>Katory</label>
+								<label>Kategori</label>
 								<select class="form-control" v-model="formData.id_category">
 									<option value="">Pilih Kategori</option>
 									<option v-for="item in category" :value="item.id">{{ item.category }}</option>
@@ -165,10 +162,6 @@ export default {
 				{
 					label: 'Judul',
 					field: 'title',
-				},
-				{
-					label: 'Isi Konten',
-					field: 'content',
 				},
 				{
 					label: 'Kategori',
