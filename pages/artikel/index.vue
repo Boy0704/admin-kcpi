@@ -83,7 +83,7 @@
 								<label for="exampleInputFile">Image</label>
 								<div class="input-group">
 									<div class="custom-file">
-										<input type="file" ref="file" class="form-control" @change="onFileUpload">
+										<input type="file" ref="file" class="form-control" @change="onFileUpload" accept="image/*">
 									</div>
 								</div>
 								<div v-if="titleModal == 'Edit Data'">
