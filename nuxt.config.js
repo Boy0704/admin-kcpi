@@ -2,7 +2,6 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   publicRuntimeConfig: {
     FileUrl: process.env.baseUrlFile,
-    ApiUrl: process.env.baseUrlAPI,
   },
 
   router: {
