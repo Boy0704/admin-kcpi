@@ -68,7 +68,7 @@
 		</section>
 
 		<div class="modal fade" id="modalForm">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title">{{ titleModal }}</h4>
@@ -83,7 +83,8 @@
 								<label for="exampleInputFile">Image</label>
 								<div class="input-group">
 									<div class="custom-file">
-										<input type="file" ref="file" class="form-control" @change="onFileUpload" accept="image/*">
+										<input type="file" ref="file" class="form-control" @change="onFileUpload"
+											accept="image/*">
 									</div>
 								</div>
 								<div v-if="titleModal == 'Edit Data'">
@@ -99,9 +100,20 @@
 							<div class="form-group">
 								<label>Isi Konten</label>
 								<client-only>
-									<quill-editor ref="editor" v-model="formData.content" :options="editorOption"
-										@blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
-										@ready="onEditorReady($event)" />
+									<editor :api-key="apiTiny" :init="{
+										height: 500,
+										menubar: true,
+										images_upload_handler: this.uploadImageHandler,
+										plugins: [
+											'advlist autolink lists link image charmap print preview anchor',
+											'searchreplace visualblocks code fullscreen',
+											'insertdatetime media table paste code help wordcount'
+										],
+										toolbar:
+											'undo redo | formatselect | bold italic backcolor | \
+																														alignleft aligncenter alignright alignjustify | \
+																														bullist numlist outdent indent | removeformat | help'
+									}" v-model="formData.content"/>
 								</client-only>
 							</div>
 							<div class="form-group">
@@ -135,10 +147,15 @@
 </template>
 
 <script>
+import Editor from '@tinymce/tinymce-vue'
 
 export default {
+	components: {
+		'editor': Editor
+	},
 	data() {
 		return {
+			apiTiny: this.$config.ApiKeyTiny,
 			urlFile: this.$config.FileUrl,
 			isEdit: false,
 			idEdit: '',
@@ -177,39 +194,25 @@ export default {
 					width: '200px',
 				},
 			],
-			editorOption: {
-				// Some Quill options...
-				theme: 'snow',
-				modules: {
-					toolbar: [
-						['bold', 'italic', 'underline', 'strike'],
-						['blockquote', 'code-block'],
-						[{ 'header': 1 }, { 'header': 2 }],
-						[{ 'list': 'ordered' }, { 'list': 'bullet' }],
-						[{ 'script': 'sub' }, { 'script': 'super' }],
-						[{ 'indent': '-1' }, { 'indent': '+1' }],
-						[{ 'direction': 'rtl' }],
-						[{ 'size': ['small', false, 'large', 'huge'] }],
-						[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-						[{ 'font': [] }],
-						[{ 'color': [] }, { 'background': [] }],
-						[{ 'align': [] }],
-						['clean'],
-						['link', 'image', 'video']
-					]
-				}
-			}
 		}
 	},
 	methods: {
-		onEditorBlur(editor) {
-			console.log('editor blur!', editor)
-		},
-		onEditorFocus(editor) {
-			console.log('editor focus!', editor)
-		},
-		onEditorReady(editor) {
-			console.log('editor ready!', editor)
+		async uploadImageHandler(blobInfo, success, failure) {
+			const formData = new FormData();
+			formData.append('file_img', blobInfo.blob(), blobInfo.filename());
+			this.$axios
+				.post('/upload-img', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				})
+				.then((response) => {
+					success(this.urlFile + "/img/" + response.data);
+				})
+				.catch((error) => {
+					console.error('Error uploading image', error);
+					failure('Error uploading image');
+				});
 		},
 		onFileUpload(event) {
 			this.existFile = true
@@ -303,17 +306,17 @@ export default {
 					console.log(err)
 				})
 		},
-		async getCategory(){
+		async getCategory() {
 			await this.$axios
-					.$get('/category')
-					.then((res) => {
-						console.log(res)
-						this.category = res.data
-					})
-					.catch((err) => {
-						console.log(err)
-						this.$toast.error('Gagal get category data !')
-					})
+				.$get('/category')
+				.then((res) => {
+					console.log(res)
+					this.category = res.data
+				})
+				.catch((err) => {
+					console.log(err)
+					this.$toast.error('Gagal get category data !')
+				})
 		},
 		async deleteData(id) {
 			if (confirm('Are you sure to delete this data ?')) {
