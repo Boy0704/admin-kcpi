@@ -100,8 +100,7 @@
 							<div class="form-group">
 								<label>Isi Konten</label>
 								<client-only>
-									<editor-tinymce v-model="formData.content"/>
-									{{ formData.content }}
+									<editor-tinymce v-model="formData.content" :model="formData.content"/>
 								</client-only>
 							</div>
 							<div class="form-group">
@@ -135,7 +134,7 @@
 </template>
 
 <script>
-import TinymceEditorCustom from '../../components/form/TinymceEditorCustom.vue';
+import TinymceEditorCustom from '@/components/form/TinymceEditorCustom.vue';
 
 export default {
 	components: {

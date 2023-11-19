@@ -34,12 +34,12 @@
                                         <div class="form-group">
                                             <label>Password Lama</label>
                                             <input-password class-form-control="form-control"
-                                                placeholder="Masukkan Password Lama" v-model="formData.passwordOld" />
+                                                placeholder="Masukkan Password Lama" v-model="formData.password_old" />
                                         </div>
                                         <div class="form-group">
                                             <label>Password Baru</label>
                                             <input-password class-form-control="form-control"
-                                                placeholder="Masukkan Password Baru" v-model="formData.newPassword" />
+                                                placeholder="Masukkan Password Baru" v-model="formData.password_new" />
                                         </div>
                                         <div class="form-group">
                                             <label>Konfirmasi Password Baru</label>
@@ -66,7 +66,7 @@
 
 <script>
 
-import Password from '../../components/form/Password.vue';
+import Password from '@/components/form/Password.vue';
 
 export default {
     components: {
@@ -77,8 +77,8 @@ export default {
             form_control2: "form-control",
             error: '',
             formData: {
-                passwordOld: '',
-                newPassword: '',
+                password_old: '',
+                password_new: '',
                 newPasswordAgain: ''
             },
 
@@ -88,15 +88,15 @@ export default {
 
         async onSubmit() {
             await this.$axios
-                .$post('/reset-password', this.formData)
+                .$post('/update-password', this.formData)
                 .then((res) => {
                     console.log(res)
                     this.$toast.info('Sukses ubah password !')
                     this.logout()
                 })
                 .catch((e) => {
-                    console.log(e)
-                    this.$toast.error('Gagal ubah password !')
+                    console.log(e.response)
+                    this.$toast.error(e.response.data.meta.message)
                 })
         },
         async logout() {
@@ -113,7 +113,7 @@ export default {
     },
     watch: {
         'formData.newPasswordAgain': function (newValue) {
-            if (newValue != this.formData.newPassword) {
+            if (newValue != this.formData.password_new) {
                 this.form_control2 = "form-control is-invalid"
                 this.error = "password tidak sama"
             } else {
