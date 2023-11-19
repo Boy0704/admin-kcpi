@@ -100,20 +100,8 @@
 							<div class="form-group">
 								<label>Isi Konten</label>
 								<client-only>
-									<editor :api-key="apiTiny" :init="{
-										height: 500,
-										menubar: true,
-										images_upload_handler: this.uploadImageHandler,
-										plugins: [
-											'advlist autolink lists link image charmap print preview anchor',
-											'searchreplace visualblocks code fullscreen',
-											'insertdatetime media table paste code help wordcount'
-										],
-										toolbar:
-											'undo redo | formatselect | bold italic backcolor | \
-																														alignleft aligncenter alignright alignjustify | \
-																														bullist numlist outdent indent | removeformat | help'
-									}" v-model="formData.content"/>
+									<editor-tinymce v-model="formData.content"/>
+									{{ formData.content }}
 								</client-only>
 							</div>
 							<div class="form-group">
@@ -147,15 +135,14 @@
 </template>
 
 <script>
-import Editor from '@tinymce/tinymce-vue'
+import TinymceEditorCustom from '../../components/form/TinymceEditorCustom.vue';
 
 export default {
 	components: {
-		'editor': Editor
+		'editor-tinymce': TinymceEditorCustom
 	},
 	data() {
 		return {
-			apiTiny: this.$config.ApiKeyTiny,
 			urlFile: this.$config.FileUrl,
 			isEdit: false,
 			idEdit: '',

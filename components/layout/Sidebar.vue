@@ -81,6 +81,15 @@
 					</li>
 
 					<li class="nav-item">
+						<a href="ubah-password" class="nav-link">
+							<i class="nav-icon fas fa-share-square"></i>
+							<p>
+								Ubah Password
+							</p>
+						</a>
+					</li>
+
+					<li class="nav-item">
 						<a href="javascript:;" @click="logout" class="nav-link">
 							<i class="nav-icon fas fa-sign-out-alt"></i>
 							<p>
