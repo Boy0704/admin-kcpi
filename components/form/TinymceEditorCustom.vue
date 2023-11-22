@@ -13,7 +13,7 @@
                 'undo redo | formatselect | bold italic backcolor | \
                 alignleft aligncenter alignright alignjustify | \
                 bullist numlist outdent indent | removeformat | help'
-        }" v-model="internalValue" required />
+        }" v-model="internalValue" />
     </div>
 </template>
 

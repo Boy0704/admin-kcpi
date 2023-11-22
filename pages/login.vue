@@ -58,7 +58,9 @@ export default {
 				console.log(response)
 				this.loading = false
 				this.$toast.info("Sukses login !")
-
+				this.$router.push({
+						name: 'index',
+					})
 			} catch (err) {
 				console.log(err.response)
 				this.loading = false

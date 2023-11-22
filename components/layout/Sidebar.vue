@@ -2,11 +2,11 @@
 	<!-- Main Sidebar Container -->
 	<aside class="main-sidebar sidebar-dark-primary elevation-4">
 		<!-- Brand Logo -->
-		<a href="/" class="brand-link">
+		<NuxtLink to="/" class="brand-link">
 			<img src="/disttemplate/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
 				style="opacity: .8">
 			<span class="brand-text font-weight-light">Admin Panel</span>
-		</a>
+		</NuxtLink>
 
 		<!-- Sidebar -->
 		<div class="sidebar">
@@ -36,57 +36,57 @@
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 					<li class="nav-item">
-						<a href="slider" class="nav-link">
+						<NuxtLink to="slider" class="nav-link">
 							<i class="nav-icon far fa-image"></i>
 							<p>
 								Data Slider
 							</p>
-						</a>
+						</NuxtLink>
 					</li>
 
 					<li class="nav-item">
-						<a href="category" class="nav-link">
+						<NuxtLink to="category" class="nav-link">
 							<i class="nav-icon fas fa-table"></i>
 							<p>
 								Data Kategori
 							</p>
-						</a>
+						</NuxtLink>
 					</li>
 
 					<li class="nav-item">
-						<a href="artikel" class="nav-link">
+						<NuxtLink to="artikel" class="nav-link">
 							<i class="nav-icon fas fa-newspaper"></i>
 							<p>
 								Data Artikel
 							</p>
-						</a>
+						</NuxtLink>
 					</li>
 
 					<li class="nav-item">
-						<a href="content-statis" class="nav-link">
+						<NuxtLink to="content-statis" class="nav-link">
 							<i class="nav-icon fas fa-columns"></i>
 							<p>
 								Data Konten Statis
 							</p>
-						</a>
+						</NuxtLink>
 					</li>
 					
 					<li class="nav-item">
-						<a href="gallery" class="nav-link">
+						<NuxtLink to="gallery" class="nav-link">
 							<i class="nav-icon fas fa-video"></i>
 							<p>
 								Data Gallery
 							</p>
-						</a>
+						</NuxtLink>
 					</li>
 
 					<li class="nav-item">
-						<a href="ubah-password" class="nav-link">
+						<NuxtLink to="ubah-password" class="nav-link">
 							<i class="nav-icon fas fa-share-square"></i>
 							<p>
 								Ubah Password
 							</p>
-						</a>
+						</NuxtLink>
 					</li>
 
 					<li class="nav-item">
