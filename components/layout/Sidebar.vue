@@ -72,10 +72,26 @@
 					</li>
 					
 					<li class="nav-item">
-						<NuxtLink to="gallery" class="nav-link">
-							<i class="nav-icon fas fa-video"></i>
+						<NuxtLink to="istilah" class="nav-link">
+							<i class="nav-icon fas fa-database"></i>
 							<p>
-								Data Gallery
+								Data Istilah
+							</p>
+						</NuxtLink>
+					</li>
+					<li class="nav-item">
+						<NuxtLink to="library" class="nav-link">
+							<i class="nav-icon fas fa-database"></i>
+							<p>
+								Data Library
+							</p>
+						</NuxtLink>
+					</li>
+					<li class="nav-item">
+						<NuxtLink to="stackholder" class="nav-link">
+							<i class="nav-icon fas fa-database"></i>
+							<p>
+								Data Info Penggiat
 							</p>
 						</NuxtLink>
 					</li>

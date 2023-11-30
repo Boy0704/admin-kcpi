@@ -1,21 +1,22 @@
 {
-  "folder_name" : "gallery",
-  "endpoint" : "/gallery",
+  "folder_name" : "stackholder",
+  "endpoint" : "/stackholder",
   "entity" : [
     {
-      "label": "Media",
-      "data_type" : "image",
-      "field_name" : "media"
-    },
-    {
-      "label": "Type",
+      "label": "Nama",
       "data_type" : "",
-      "field_name" : "type"
+      "field_name" : "nama"
     },
     {
-      "label": "Publish",
-      "data_type" : "false",
-      "field_name" : "publish"
+      "label": "Tipe",
+      "data_type" : "",
+      "field_name" : "tipe"
+    },
+    {
+      "label": "Telepon",
+      "data_type" : "",
+      "field_name" : "telepon"
     }
+    
   ]
 }
