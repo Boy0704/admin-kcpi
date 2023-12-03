@@ -106,6 +106,15 @@
 					</li>
 
 					<li class="nav-item">
+						<NuxtLink to="/form-survey" class="nav-link">
+							<i class="nav-icon fas fa-newspaper"></i>
+							<p>
+								Data Form Survey
+							</p>
+						</NuxtLink>
+					</li>
+
+					<li class="nav-item">
 						<a href="javascript:;" @click="logout" class="nav-link">
 							<i class="nav-icon fas fa-sign-out-alt"></i>
 							<p>
