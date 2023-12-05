@@ -97,6 +97,14 @@
 					</li>
 
 					<li class="nav-item">
+						<NuxtLink to="ubah-setting" class="nav-link">
+							<i class="nav-icon fas fa-setting"></i>
+							<p>
+								Setting
+							</p>
+						</NuxtLink>
+					</li>
+					<li class="nav-item">
 						<NuxtLink to="ubah-password" class="nav-link">
 							<i class="nav-icon fas fa-share-square"></i>
 							<p>
