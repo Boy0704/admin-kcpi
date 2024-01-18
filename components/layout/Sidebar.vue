@@ -114,10 +114,10 @@
 					</li>
 
 					<li class="nav-item">
-						<NuxtLink to="/form-survey" class="nav-link">
+						<NuxtLink to="/survey_kepuasan" class="nav-link">
 							<i class="nav-icon fas fa-newspaper"></i>
 							<p>
-								Data Form Survey
+								Data Survey
 							</p>
 						</NuxtLink>
 					</li>
