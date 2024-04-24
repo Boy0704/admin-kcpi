@@ -95,6 +95,14 @@
 							</p>
 						</NuxtLink>
 					</li>
+					<li class="nav-item">
+						<NuxtLink to="videos" class="nav-link">
+							<i class="nav-icon fas fa-database"></i>
+							<p>
+								Data Video
+							</p>
+						</NuxtLink>
+					</li>
 
 					<li class="nav-item">
 						<NuxtLink to="ubah-setting" class="nav-link">

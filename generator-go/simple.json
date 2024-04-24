@@ -1,21 +1,26 @@
 {
-  "folder_name" : "stackholder",
-  "endpoint" : "/stackholder",
+  "folder_name" : "videos",
+  "endpoint" : "/videos",
   "entity" : [
     {
-      "label": "Nama",
+      "label": "Judul",
       "data_type" : "",
-      "field_name" : "nama"
+      "field_name" : "judul"
     },
     {
-      "label": "Tipe",
+      "label": "Deskripsi",
       "data_type" : "",
-      "field_name" : "tipe"
+      "field_name" : "deskripsi"
     },
     {
-      "label": "Telepon",
+      "label": "Thumbnail",
+      "data_type" : "image",
+      "field_name" : "thumbnail"
+    },
+    {
+      "label": "Link",
       "data_type" : "",
-      "field_name" : "telepon"
+      "field_name" : "Link"
     }
     
   ]
