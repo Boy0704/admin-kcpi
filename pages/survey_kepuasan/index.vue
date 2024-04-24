@@ -170,8 +170,8 @@
 export default {
   data() {
     return {
-      start_date: "",
-      end_date: "",
+      start_date: new Date().toISOString().slice(0,10),
+      end_date: new Date().toISOString().slice(0,10),
       result: [],
       sum_male: 0,
       sum_female: 0,
@@ -253,6 +253,9 @@ export default {
         },
       ],
     };
+  },
+  mounted(){
+    this.getDataSurvey();
   },
   methods: {
     getDataSurvey: async function () {
