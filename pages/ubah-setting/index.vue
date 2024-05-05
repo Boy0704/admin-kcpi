@@ -54,6 +54,10 @@
                                             <label>Youtube</label>
                                             <textarea class="form-control" cols="30" rows="3" v-model="formData.youtube"></textarea>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Tiktok</label>
+                                            <textarea class="form-control" cols="30" rows="3" v-model="formData.tiktok"></textarea>
+                                        </div>
 
                                     </div>
                                     <div class="modal-footer justify-content-between">
@@ -80,7 +84,8 @@ export default {
                 fb: '',
                 ig: '',
                 twitter: '',
-                youtube: ''
+                youtube: '',
+                tiktok:'',
             },
 
         }
@@ -109,6 +114,7 @@ export default {
 					this.formData.twitter = res.data.twitter
 					this.formData.fb = res.data.fb
 					this.formData.youtube = res.data.youtube
+                    this.formData.tiktok = res.data.tiktok
 				})
 				.catch((err) => {
 					console.log(err)
